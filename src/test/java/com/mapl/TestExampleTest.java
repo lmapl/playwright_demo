@@ -14,7 +14,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestExample {
+public class TestExampleTest {
   // Shared between all tests in this class.
   static Playwright playwright;
   static Browser browser;
