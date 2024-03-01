@@ -3,10 +3,14 @@ package com.mapl;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.AriaRole;
+
 import org.junit.jupiter.api.*;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -64,5 +68,35 @@ public class TestExample {
     page.locator("input[name=\"search\"]").press("Enter");
     assertEquals("https://en.wikipedia.org/wiki/Playwrighteee", page.url());
     int a = 0/0;
+  }
+
+  @Test
+  public static void shouldSearchWiki2() {
+    try (Playwright playwright = Playwright.create()) {
+      Browser browser = playwright.chromium().launch();
+      Page page = browser.newPage();
+      page.navigate("http://playwright.dev");
+
+      // create a locator
+      Locator getStarted = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Get Started"));
+
+      // Expect an attribute "to be strictly equal" to the value.
+      assertThat(getStarted).hasAttribute("href", "/docs/introddd");
+
+      Locator getStarted2 = page.locator("text=TypeScript");
+      String a = getStarted2.getAttribute("href");
+
+      // Click the get started link.
+      // 模拟点击页面跳转
+      getStarted.click();
+
+      // Expects page to have a heading with the name of Installation.
+      // 跳转后新页面内的内容
+      assertThat(page.getByRole(AriaRole.HEADING,
+          new Page.GetByRoleOptions().setName("Installation"))).isVisible();
+
+
+
+    }
   }
 }
