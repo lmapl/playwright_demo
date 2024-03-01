@@ -63,5 +63,6 @@ public class TestExample {
     page.locator("input[name=\"search\"]").fill("playwright");
     page.locator("input[name=\"search\"]").press("Enter");
     assertEquals("https://en.wikipedia.org/wiki/Playwrighteee", page.url());
+    int a = 0/0;
   }
 }
